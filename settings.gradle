@@ -1,0 +1,8 @@
+rootProject.name = "JetpackLearn"
+include ':app'
+include ':lifecycle'
+include ':viewmodel'
+include ':livedata'
+include ':livedata2'
+include ':databinding'
+include ':databinding2'
