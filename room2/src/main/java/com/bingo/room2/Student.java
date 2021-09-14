@@ -17,8 +17,12 @@ public class Student {
     public String name;
     @ColumnInfo(name = "age", typeAffinity = ColumnInfo.INTEGER)
     public int age;
-    @ColumnInfo(name = "sex", typeAffinity = ColumnInfo.INTEGER)
-    public int sex;
+    //db v2.0
+    //@ColumnInfo(name = "sex", typeAffinity = ColumnInfo.INTEGER)
+    //public int sex;
+    //db v4.0
+    @ColumnInfo(name = "sex", typeAffinity = ColumnInfo.TEXT)
+    public String sex;
     @ColumnInfo(name = "score", typeAffinity = ColumnInfo.INTEGER)
     public int score;
     @Ignore
