@@ -17,7 +17,10 @@ public class Student {
     public String name;
     @ColumnInfo(name = "age", typeAffinity = ColumnInfo.INTEGER)
     public int age;
-
+    @ColumnInfo(name = "sex", typeAffinity = ColumnInfo.INTEGER)
+    public int sex;
+    @ColumnInfo(name = "score", typeAffinity = ColumnInfo.INTEGER)
+    public int score;
     @Ignore
     public boolean flag;
 
