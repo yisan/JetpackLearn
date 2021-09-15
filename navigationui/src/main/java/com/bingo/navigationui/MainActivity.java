@@ -29,12 +29,7 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         //监听页面切换
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                Log.d("bingo","onDestinationChanged");
-            }
-        });
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> Log.d("bingo","onDestinationChanged"));
     }
 
     @Override
