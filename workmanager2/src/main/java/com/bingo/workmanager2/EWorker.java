@@ -10,8 +10,8 @@ import androidx.work.WorkerParameters;
 /**
  * Created by ing on 2021/9/15
  */
-public class AWorker extends Worker {
-    public AWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+public class EWorker extends Worker {
+    public EWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
