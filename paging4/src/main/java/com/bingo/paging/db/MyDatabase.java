@@ -26,4 +26,5 @@ public abstract class MyDatabase extends RoomDatabase {
         }
         return mInstance;
     }
+    public abstract MovieDao getMovieDao();
 }

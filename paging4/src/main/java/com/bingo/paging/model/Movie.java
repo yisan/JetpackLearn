@@ -14,15 +14,15 @@ import androidx.room.PrimaryKey;
 public class Movie {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "no", typeAffinity = ColumnInfo.INTEGER)
-    private int no;
+    public int no;
     @ColumnInfo(name = "id", typeAffinity = ColumnInfo.INTEGER)
-    private int id;
+    public int id;
     @ColumnInfo(name = "title", typeAffinity = ColumnInfo.TEXT)
-    private String title;
+    public String title;
     @ColumnInfo(name = "cover", typeAffinity = ColumnInfo.TEXT)
-    private String cover;
+    public String cover;
     @ColumnInfo(name = "rate", typeAffinity = ColumnInfo.TEXT)
-    private String rate;
+    public String rate;
 
     @Override
     public String toString() {
@@ -44,11 +44,7 @@ public class Movie {
             return false;
         }
         Movie movie = (Movie) o;
-        return no == movie.no &&
-                id == movie.id &&
-                Objects.equals(title, movie.title) &&
-                Objects.equals(cover, movie.cover) &&
-                Objects.equals(rate, movie.rate);
+        return no == movie.no && id == movie.id && Objects.equals(title, movie.title) && Objects.equals(cover, movie.cover) && Objects.equals(rate, movie.rate);
     }
 
     @Override

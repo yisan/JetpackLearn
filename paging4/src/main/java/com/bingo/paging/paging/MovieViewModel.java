@@ -1,26 +1,41 @@
 package com.bingo.paging.paging;
 
+import android.app.Application;
+import android.os.AsyncTask;
+
+import com.bingo.paging.db.MovieDao;
+import com.bingo.paging.db.MyDatabase;
 import com.bingo.paging.model.Movie;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.loader.content.AsyncTaskLoader;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
+import androidx.room.Dao;
+import androidx.room.Database;
 
 /**
  * Created by ing on 2021/9/17
  */
-public class MovieViewModel extends ViewModel {
+public class MovieViewModel extends AndroidViewModel {
+    public static final int PER_PAGE = 8;
     public LiveData<PagedList<Movie>> moviePagedList;
+   private MovieDao movieDao;
 
-    public MovieViewModel(){
-        PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPageSize(MovieDataSource.PER_PAGE)
-                // 当距离底部还有多少条数据时开始加载下一页
-                .setPrefetchDistance(2)
-                .setMaxSize(100*MovieDataSource.PER_PAGE)
+    public MovieViewModel(@NonNull Application application) {
+        super(application);
+        movieDao = MyDatabase.getInstance(application).getMovieDao();
+        moviePagedList = new LivePagedListBuilder<>(movieDao.getMovies(),PER_PAGE)
+                .setBoundaryCallback(new MovieBoundaryCallback(application))
                 .build();
-        moviePagedList = new LivePagedListBuilder<>(new MovieDataSourceFactory(),config).build();
+    }
+    public  void refresh(){
+        AsyncTask.execute(()->{
+            // 清空数据库，boundarycallback会自动重新请求数据。
+            movieDao.clear();
+        });
     }
 }

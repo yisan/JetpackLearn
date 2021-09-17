@@ -49,9 +49,9 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = getItem(position);
         if (movie != null) {
-            Glide.with(context).load(movie.getCover()).placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background).into(holder.imageView);
-            holder.title.setText(movie.getTitle());
-            holder.rate.setText(movie.getRate());
+            Glide.with(context).load(movie.cover).placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background).into(holder.imageView);
+            holder.title.setText(movie.title);
+            holder.rate.setText(movie.rate);
         }
     }
 

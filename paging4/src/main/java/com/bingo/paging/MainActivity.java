@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,17 +20,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         MoviePagedListAdapter moviePagedListAdapter = new MoviePagedListAdapter(this);
         recyclerView.setAdapter(moviePagedListAdapter);
 
         MovieViewModel movieViewModel = new ViewModelProvider(this,new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(MovieViewModel.class);
-        movieViewModel.moviePagedList.observe(this, new Observer<PagedList<Movie>>() {
-            @Override
-            public void onChanged(PagedList<Movie> movies) {
-                moviePagedListAdapter.submitList(movies);
-            }
+        movieViewModel.moviePagedList.observe(this, moviePagedListAdapter::submitList);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            movieViewModel.refresh();
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 }
