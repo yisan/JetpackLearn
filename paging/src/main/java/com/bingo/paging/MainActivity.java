@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         movieViewModel.moviePagedList.observe(this, new Observer<PagedList<Movie>>() {
             @Override
             public void onChanged(PagedList<Movie> movies) {
-                moviePagedListAdapter.notifyDataSetChanged();
+                moviePagedListAdapter.submitList(movies);
             }
         });
     }

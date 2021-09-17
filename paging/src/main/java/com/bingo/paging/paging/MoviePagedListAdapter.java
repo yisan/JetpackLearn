@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bingo.paging.R;
 import com.bingo.paging.model.Movie;
+import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
@@ -23,7 +24,7 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
     private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK = new DiffUtil.ItemCallback<Movie>() {
         @Override
         public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem==newItem;
+            return oldItem == newItem;
         }
 
         @Override
@@ -31,6 +32,7 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
             return oldItem.equals(newItem);
         }
     };
+
     public MoviePagedListAdapter(Context context) {
         super(DIFF_CALLBACK);
         this.context = context;
@@ -39,13 +41,18 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View root =  LayoutInflater.from(context).inflate(R.layout.item,parent,false);
+        View root = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
         return new MovieViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-
+        Movie movie = getItem(position);
+        if (movie != null) {
+            Glide.with(context).load(movie.getCover()).placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background).into(holder.imageView);
+            holder.title.setText(movie.getTitle());
+            holder.rate.setText(movie.getRate());
+        }
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {

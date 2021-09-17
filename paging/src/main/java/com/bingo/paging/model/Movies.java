@@ -1,6 +1,5 @@
 package com.bingo.paging.model;
 
-import android.graphics.Movie;
 
 import com.google.gson.annotations.SerializedName;
 

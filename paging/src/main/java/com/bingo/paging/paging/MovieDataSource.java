@@ -1,10 +1,10 @@
 package com.bingo.paging.paging;
 
-import android.graphics.Movie;
 import android.util.Log;
 
 
 import com.bingo.paging.api.RetrofitClient;
+import com.bingo.paging.model.Movie;
 import com.bingo.paging.model.Movies;
 
 import androidx.annotation.NonNull;
@@ -27,6 +27,7 @@ public class MovieDataSource extends PositionalDataSource<Movie> {
             @Override
             public void onResponse(Call<Movies> call, Response<Movies> response) {
                 if (response.body()!=null){
+                    Log.d("bingo","loadInitial response: "+response.body().toString());
                     // 数据传递给PageList
                     callback.onResult(response.body().getMovies(),response.body().getStart(),response.body().getTotal());
                 }
