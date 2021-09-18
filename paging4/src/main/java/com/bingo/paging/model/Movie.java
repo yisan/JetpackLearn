@@ -9,6 +9,11 @@ import androidx.room.PrimaryKey;
 
 /**
  * Created by ing on 2021/9/16
+ * 实体类，对应的是数据库的一张表结构。需要使用注解 @Entity 标记
+ *
+ * * @PrimaryKey 注解用来标注表的主键，并且使用autoGenerate = true 来指定了主键自增长。
+ * * @ColumnInfo 注解用来标注表对应的列的信息比如表名、默认值等等。
+ * * @Ignore 注解顾名思义就是忽略这个字段，使用了这个注解的字段将不会在数据库中生成对应的列信息。也可以使用@Entity注解中的 ignoredColumns 参数来指定，效果是一样的。
  */
 @Entity(tableName = "movie")
 public class Movie {
